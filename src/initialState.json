@@ -1,5 +1,7 @@
 {
     "comment": "Ceci représente la structure de notre état qui devra être géré du côté de Redux",
+    "comment_compteur": "Le compteur est juste à titre d'exemple",
+    "compteur": 1,
     "allBooks": [
         {
             "id": 1,
