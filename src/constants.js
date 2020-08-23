@@ -1,6 +1,7 @@
 //Définition des constantes pour les différentes actions
 const constants = {
     SET_COMPTEUR: "SET_COMPTEUR",
+    SET_USER: "SET_USER",
     ADD_BOOK: "ADD_BOOK",
     REMOVE_BOOK: "REMOVE_BOOK",
     ADD_ERROR: "ADD_ERROR",
