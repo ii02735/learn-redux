@@ -9,8 +9,8 @@ import CONSTANTS from "./constants"
 /**
  * Chaque clé qui se trouve dans initialState devrait avoir son propre reducer
  */
-import { compteur, utilisateur } from "./initialState"
-import { compteurReducer, utilisateurReducer } from "./store/reducers";
+import { compteur, utilisateur, allBooks, booksBorrowed } from "./initialState"
+import { compteurReducer, utilisateurReducer, bookBorrowReducer } from "./store/reducers";
 
 //Ici on définit une action pour mettre à jour notre compteur
 //L'action sera envoyée à redux pour mettre à jour le state du compteur
@@ -33,6 +33,7 @@ const state = compteur; //ici compteur est la valeur renseignée depuis le fichi
 const nextState = compteurReducer(state,action); //la fonction compteurReducer va justement gérer les différents types d'action pour gérer notre compteur
 
 console.log(`
+    ----------------------------------------------
     initial compteur: ${state},
     action: ${JSON.stringify(action)},
     new compteur: ${nextState}
@@ -53,21 +54,42 @@ let actionUser = {
 let nextStateUser = utilisateurReducer(stateUser,actionUser);
 
 console.log(`
+    ----------------------------------------------
     initial utilisateur: ${JSON.stringify(stateUser)},
     action: ${JSON.stringify(actionUser)},
     next utilisateur: ${JSON.stringify(nextStateUser)}
 `)
 
-//On suppose qu'on déconnecte l'utilisateur
-actionUser = {
-    type: CONSTANTS.SET_USER,
-    payload: {}
+// const oldStateUser = nextStateUser;
+
+// //On suppose qu'on déconnecte l'utilisateur
+// actionUser = {
+//     type: CONSTANTS.SET_USER,
+//     payload: {}
+// }
+
+// nextStateUser = utilisateurReducer(stateUser,actionUser);
+
+// console.log(`
+//     initial utilisateur: ${JSON.stringify(oldStateUser)},
+//     action: ${JSON.stringify(actionUser)},
+//     next utilisateur: ${JSON.stringify(nextStateUser)}
+// `)
+
+const borrowedBooksState = booksBorrowed;
+
+let bookToBorrow = allBooks.find((book) => book.id === 1);
+
+const actionBorrowedBooks = {
+    type: CONSTANTS.BORROW_BOOK,
+    payload: bookToBorrow
 }
 
-nextStateUser = utilisateurReducer(stateUser,actionUser);
+const nextBorrowedBooksState = bookBorrowReducer(borrowedBooksState,actionBorrowedBooks);
 
 console.log(`
-    initial utilisateur: ${JSON.stringify(stateUser)},
-    action: ${JSON.stringify(actionUser)},
-    next utilisateur: ${JSON.stringify(nextStateUser)}
+    ----------------------------------------------
+    initial livres empruntés: ${JSON.stringify(borrowedBooksState)},
+    action: ${JSON.stringify(actionBorrowedBooks)},
+    next livres empruntés: ${JSON.stringify(nextBorrowedBooksState)}
 `)

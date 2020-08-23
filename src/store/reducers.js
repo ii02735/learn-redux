@@ -42,3 +42,19 @@ export const utilisateurReducer = (state,action) => {
             return state;
     }
 }
+
+//On peut emprunter plusieurs livres, d'où la structure Array dans initialState
+export const bookBorrowReducer = (state=[],action) => {
+
+    switch(action.type)
+    {
+        case CONSTANTS.BORROW_BOOK:
+            //on ne souhaite pas faire un push car sinon on risque modifier l'état initial
+            //il faut retourner un nouveau tableau
+            const stateCpy = [...state];
+            stateCpy.push(action.payload);
+            return stateCpy;
+        default:
+            return state;    
+    }
+}
