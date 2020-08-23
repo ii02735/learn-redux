@@ -9,14 +9,16 @@ import CONSTANTS from "../constants"
 //CombineReducers nous permet de combiner plusieurs reducers en un seul
 //Et c'est à partir de de ce moment-là que Redux entre en jeu
 import { combineReducers } from "redux";
-//Il faut que chaque reducer ait un état par défaut
-import initialState from "../initialState.json";
+
 /**
  * Structure de reducer
  * @param {Object} state État initial 
  * @param {string} action Action à exécuter pour changer l'état
  */
-export const compteurReducer = (state=initialState.compteur,action) => {
+
+//ON PASSE chaque STATE à NULL afin de permettre à createStore de charger les états fournis par la suite (second paramètre de createStore)
+//SINON les valeurs DÉFINITVES SERONT À UNDEFINED !!!
+export const compteurReducer = (state=null,action) => {
     /**
      * Ici on doit définir l'exécution de chaque action
      * selon les différentes valeurs
@@ -32,7 +34,7 @@ export const compteurReducer = (state=initialState.compteur,action) => {
 
 //Définition d'un reducer pour gérer l'utilisateur
 
-export const utilisateurReducer = (state=initialState.utilisateur,action) => {
+export const utilisateurReducer = (state=null,action) => {
 
     switch(action.type)
     {
@@ -43,8 +45,7 @@ export const utilisateurReducer = (state=initialState.utilisateur,action) => {
     }
 }
 
-//On peut emprunter plusieurs livres, d'où la structure Array dans initialState
-export const bookBorrowReducer = (state=initialState.booksBorrowed,action) => {
+export const bookBorrowReducer = (state=null,action) => {
 
     switch(action.type)
     {
@@ -60,7 +61,7 @@ export const bookBorrowReducer = (state=initialState.booksBorrowed,action) => {
 }
 
 //Reducer pour la récupération de données (depuis un serveur HTTP par exemple)
-export const fetchingDataReducer = (state=initialState.fetchingData,action) => {
+export const fetchingDataReducer = (state=null,action) => {
     switch (action.type) {
         case CONSTANTS.FETCHING_DATA:
             return true;
@@ -74,7 +75,7 @@ export const fetchingDataReducer = (state=initialState.fetchingData,action) => {
 }
 
 //Reducer pour gérer la liste de tous les livres
-export const booksReducer = (state=initialState.allBooks,action) => {
+export const booksReducer = (state=null,action) => {
     let stateCpy = null;
     switch(action.type) {
         case CONSTANTS.ADD_BOOK:
@@ -91,7 +92,7 @@ export const booksReducer = (state=initialState.allBooks,action) => {
     }
 }
 
-export const errorsReducer = (state=initialState.errors,action) => {
+export const errorsReducer = (state=null,action) => {
     let stateCpy = null;
     switch(action.type) {
         case CONSTANTS.ADD_ERROR:

@@ -8,58 +8,35 @@
  import mainReducer from "./store/reducers"
  import initialState from "./initialState.json"
 
- let state = initialState;
-//On affiche les différents attributs de l'état initial
- console.log(`
-    
-    Initial state
-    =======================
-    Compteur: ${state.compteur}
-    Utilisateur: ${JSON.stringify(state.utilisateur)}
-    Tous les livres: ${JSON.stringify(state.allBooks)}
-    Livres empruntés: ${JSON.stringify(state.booksBorrowed)}
-    Récupération des données en cours ? : ${state.fetchingData}
+ //Il est inutile de passer par le mainReducer manuellement pour gérer / muter notre état
+ //C'est justement le STORE qui gère la mutation d'état 
 
- `);
+ import { createStore } from "redux"
 
- //On procède ensuite à la modification
-
- state = mainReducer(state,{
-    type: CONSTANTS.SET_COMPTEUR,
-    payload: 200
- })
-
- //Ce qui est intéressant c'est que mainReducer englobe tout le state
- //Car il contient la structure de l'objet du state (puisqu'on a renseigné les clés du state initial)
-
+ 
+ const store = createStore(mainReducer, initialState); //création d'un store
+                              //On récupère l'état actuel du store (soit l'état global)
+                              /**
+                               * Chaque valeur du state est la valeur par défaut renseignée
+                               * dans les fonctions des reducers
+                               */
+//grâce au createStore, il est inutile d'appeler le mainReducer et de créer des variables différentes qui vont stocker les différents states
+//getState() permet donc de récupérer l'état global
+ console.log("Initial state", store.getState());
 
  /**
-  * Ainsi l'objet "state" contient toutes les clés du stateInitial, et cela grâce au combineReducer
-  * donc grâce à Redux
+  * Pour MUTER un état, on utilise la fonction DISPATCH
   */
-
-  state = mainReducer(state,{
-      type: CONSTANTS.BORROW_BOOK,
-      payload: state.allBooks.find((book) => book.id === 1)
+  
+  //Exemple pour muter le compteur
+  /**
+   * dispatch contacte les reducers, et le bon reducer (d'après le type)
+   * procèdera au changement de l'état
+   */
+  store.dispatch({
+     type: CONSTANTS.SET_COMPTEUR,
+     payload: 2000
   })
 
-  state = mainReducer(state,{
-    type: CONSTANTS.BORROW_BOOK,
-    payload: state.allBooks.find((book) => book.id === 2)
-  })
 
-  //on a changé le state pour le compteur, et pour les livres empruntés
-
- console.log(`
-    
-    Next state
-    =======================
-    Compteur: ${state.compteur}
-    Utilisateur: ${JSON.stringify(state.utilisateur)}
-    Tous les livres: ${JSON.stringify(state.allBooks)}
-    Livres empruntés: ${JSON.stringify(state.booksBorrowed)}
-    Récupération des données en cours ? : ${state.fetchingData}
-
-`);
-
-console.log("hello world")
+  console.log("changed state", store.getState())
