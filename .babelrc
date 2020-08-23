@@ -1,0 +1,5 @@
+{
+    //ajout du preset env pour dire à Babel qu'il devra transpiler / convertir
+    //Ici on lui demande de transpiler du ES6
+    "presets": ["env"]
+}
