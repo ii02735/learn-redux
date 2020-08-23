@@ -4,15 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "comment": "on dit à Babel de lancer index.js pour effectuer la transpilation et l'exécuter ensuite (pas besoin de préciser 'index.js' car il s'agit du fichier par défaut )",
-    "start": "./node_modules/.bin/babel-node ./src/",
+    "comment": "Babel mis au rebut : passage à webpack",
+    "start": "webpack-dev-server",
+    "watch": "webpack --watch",
+    "build": "webpack",
     "example": "./node_modules/.bin/babel-node ./src/indexReducersExample.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "json-loader": "^0.5.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "redux": "^4.0.5"
