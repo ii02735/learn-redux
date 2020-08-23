@@ -58,3 +58,17 @@ export const bookBorrowReducer = (state=[],action) => {
             return state;    
     }
 }
+
+//Reducer pour la récupération de données (depuis un serveur HTTP par exemple)
+export const fetchingDataReducer = (state=false,action) => {
+    switch (action.type) {
+        case CONSTANTS.FETCHING_DATA:
+            return true;
+        
+        case CONSTANTS.FINISHED_FETCHING:
+            return false;    
+
+        default:
+            return state;
+    }
+}
