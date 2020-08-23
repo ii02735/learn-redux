@@ -9,8 +9,8 @@ import CONSTANTS from "./constants"
 /**
  * Chaque clé qui se trouve dans initialState devrait avoir son propre reducer
  */
-import { compteur } from "./initialState"
-import { compteurReducer } from "./store/reducers";
+import { compteur, utilisateur } from "./initialState"
+import { compteurReducer, utilisateurReducer } from "./store/reducers";
 
 //Ici on définit une action pour mettre à jour notre compteur
 //L'action sera envoyée à redux pour mettre à jour le state du compteur
@@ -36,4 +36,38 @@ console.log(`
     initial compteur: ${state},
     action: ${JSON.stringify(action)},
     new compteur: ${nextState}
+`)
+
+//On va faire la même chose pour l'utilisateur actuel
+
+const stateUser = utilisateur;
+
+let actionUser = {
+    type: CONSTANTS.SET_USER,
+    payload: {
+        role: "Manager",
+        username: "Edward Books"
+    }
+}
+
+let nextStateUser = utilisateurReducer(stateUser,actionUser);
+
+console.log(`
+    initial utilisateur: ${JSON.stringify(stateUser)},
+    action: ${JSON.stringify(actionUser)},
+    next utilisateur: ${JSON.stringify(nextStateUser)}
+`)
+
+//On suppose qu'on déconnecte l'utilisateur
+actionUser = {
+    type: CONSTANTS.SET_USER,
+    payload: {}
+}
+
+nextStateUser = utilisateurReducer(stateUser,actionUser);
+
+console.log(`
+    initial utilisateur: ${JSON.stringify(stateUser)},
+    action: ${JSON.stringify(actionUser)},
+    next utilisateur: ${JSON.stringify(nextStateUser)}
 `)
