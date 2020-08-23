@@ -6,12 +6,33 @@
  * 
  */
 import CONSTANTS from "./constants"
-import { allBooks, booksBorrowed } from "./initialState.json"
+/**
+ * Chaque clé qui se trouve dans initialState devrait avoir son propre reducer
+ */
+import { compteur } from "./initialState"
+
+//Ici on définit une action pour mettre à jour notre compteur
+//L'action sera envoyée à redux pour mettre à jour le state du compteur
+/**
+ * Une action se définit de la façon suivante :
+ * {
+ *      type: TYPE_ACTION,
+ *      payload ("charge utile", ou data, state... : information qui devra être envoyée): DATA 
+ * }
+ */
+
+const state = compteur; 
+
+//Une action représente une mutation / un changement d'état
+ const action = {
+     type: CONSTANTS.SET_COMPTEUR,
+     payload: 10
+ } //l'action ici signifie qu'on souhaite modifier le compteur, et on souhaite lui donner la valeur 10
+
+const nextState = compteurReducer(state,action); //la fonction compteurReducer va justement gérer les différents types d'action pour gérer notre compteur
 
 console.log(`
-    Voici les livres :
-    ${allBooks.map((book) => book.titre).join(', ')}
-
-    Ainsi que les actions :
-    ${Object.keys(CONSTANTS).join('\n       ')}
+    initial compteur: ${state},
+    action: ${JSON.stringify(action)},
+    new compteur: ${nextState}
 `)
