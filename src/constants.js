@@ -5,6 +5,7 @@ const constants = {
     ADD_BOOK: "ADD_BOOK",
     REMOVE_BOOK: "REMOVE_BOOK",
     ADD_ERROR: "ADD_ERROR",
+    REMOVE_ERROR: "REMOVE_ERROR",
     BORROW_BOOK: "BORROW_BOOK", //pour réserver / emprunter un livre
     GIVE_BACK_BOOK: "GIVE_BACK_BOOK", //rendre un livre
     FETCHING_DATA: "FETCHING_DATA",
