@@ -9,13 +9,14 @@ import CONSTANTS from "../constants"
 //CombineReducers nous permet de combiner plusieurs reducers en un seul
 //Et c'est à partir de de ce moment-là que Redux entre en jeu
 import { combineReducers } from "redux";
-
+//Il faut que chaque reducer ait un état par défaut
+import initialState from "../initialState.json";
 /**
  * Structure de reducer
  * @param {Object} state État initial 
  * @param {string} action Action à exécuter pour changer l'état
  */
-export const compteurReducer = (state,action) => {
+export const compteurReducer = (state=initialState.compteur,action) => {
     /**
      * Ici on doit définir l'exécution de chaque action
      * selon les différentes valeurs
@@ -35,7 +36,7 @@ export const compteurReducer = (state,action) => {
 
 //Définition d'un reducer pour gérer l'utilisateur
 
-export const utilisateurReducer = (state,action) => {
+export const utilisateurReducer = (state=initialState.utilisateur,action) => {
 
     switch(action.type)
     {
@@ -47,7 +48,7 @@ export const utilisateurReducer = (state,action) => {
 }
 
 //On peut emprunter plusieurs livres, d'où la structure Array dans initialState
-export const bookBorrowReducer = (state=[],action) => {
+export const bookBorrowReducer = (state=initialState.booksBorrowed,action) => {
 
     switch(action.type)
     {
@@ -63,7 +64,7 @@ export const bookBorrowReducer = (state=[],action) => {
 }
 
 //Reducer pour la récupération de données (depuis un serveur HTTP par exemple)
-export const fetchingDataReducer = (state=false,action) => {
+export const fetchingDataReducer = (state=initialState.fetchingData,action) => {
     switch (action.type) {
         case CONSTANTS.FETCHING_DATA:
             return true;
@@ -83,9 +84,15 @@ export const fetchingDataReducer = (state=false,action) => {
  */
 
  //Si on inspecte que le fichier initialState, on s'aperçoit qu'on a repris la structure de ce dernier : chaque clé a son propre reducer
+
+ /**
+  * Attention !!!
+  * Il faut que chaque reducer ait un attribut
+  * qui est le nom de l'état auquel il est rattaché
+  */
  export default combineReducers({
-     compteurReducer,
-     utilisateurReducer,
-     bookBorrowReducer,
-     fetchingDataReducer
+     compteur: compteurReducer,
+     utilisateur: utilisateurReducer,
+     booksBorrowed: bookBorrowReducer,
+     fetchingData: fetchingDataReducer
  })
