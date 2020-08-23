@@ -4,10 +4,10 @@ module.exports = {
     entry: "./src/index.js", //on donne à Webpack index.js en entrée
     output: { //le fichier en sortie
         path: path.resolve(__dirname,"dist/assets"), //le fichier ira dans le dossier dist/assets
-        filename: "main.js",
-        publicPath: path.resolve(__dirname,"dist/assets")
+        filename: "bundle.js"
     },
     devServer: {
+        //ATTENTION : webpack-dev-server ne regénère pas les fichiers que webpack surveille !!! Il faut lancer webpack --watch puis le webpack-dev-server
         inline: true, //insertion d'un script permettant le hot-reload + insertion de messages de build dans la console
         contentBase: path.join(__dirname,"dist"), //le dossier sur lequel le serveur client devra utiliser
         port: 3030,
