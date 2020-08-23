@@ -10,6 +10,7 @@ import CONSTANTS from "./constants"
  * Chaque clé qui se trouve dans initialState devrait avoir son propre reducer
  */
 import { compteur } from "./initialState"
+import { compteurReducer } from "./store/reducers";
 
 //Ici on définit une action pour mettre à jour notre compteur
 //L'action sera envoyée à redux pour mettre à jour le state du compteur
@@ -21,7 +22,7 @@ import { compteur } from "./initialState"
  * }
  */
 
-const state = compteur; 
+const state = compteur; //ici compteur est la valeur renseignée depuis le fichier JSON
 
 //Une action représente une mutation / un changement d'état
  const action = {
