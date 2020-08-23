@@ -77,6 +77,41 @@ export const fetchingDataReducer = (state=initialState.fetchingData,action) => {
     }
 }
 
+//Reducer pour gérer la liste de tous les livres
+export const booksReducer = (state=initialState.allBooks,action) => {
+    let stateCpy = null;
+    switch(action.type) {
+        case CONSTANTS.ADD_BOOK:
+            stateCpy = state.slice();
+            stateCpy.push(action.payload);
+            return stateCpy;
+        case CONSTANTS.REMOVE_BOOK:
+            stateCpy = state.slice();
+            //On prend l'id du book qu'on souhaite supprimer
+            stateCpy.splice(stateCpy.find((book) => book.id === action.payload.id))
+            return stateCpy;
+        default:
+            return state;
+    }
+}
+
+export const errorsReducer = (state=initialState.errors,action) => {
+    let stateCpy = null;
+    switch(action.type) {
+        case CONSTANTS.ADD_ERROR:
+            stateCpy = state.slice();
+            stateCpy.push(action.payload);
+            return stateCpy;
+        case CONSTANTS.REMOVE_ERROR:
+            stateCpy = state.slice();
+            //On prend l'id du book qu'on souhaite supprimer
+            stateCpy.splice(stateCpy.find((book) => book.id === action.payload.id))
+            return stateCpy;
+        default:
+            return state;
+    }
+}
+
 //CombineReducer est une fonction qui intègre plusieurs reducers :
 /**
  * const reducer = combineReduer({ compteurReducer, utilisateurReducer, bookBorrowReducer, fetchingDataReducer })
@@ -84,15 +119,24 @@ export const fetchingDataReducer = (state=initialState.fetchingData,action) => {
  */
 
  //Si on inspecte que le fichier initialState, on s'aperçoit qu'on a repris la structure de ce dernier : chaque clé a son propre reducer
-
- /**
+/**
   * Attention !!!
   * Il faut que chaque reducer ait un attribut
   * qui est le nom de l'état auquel il est rattaché
   */
- export default combineReducers({
+export default combineReducers({
      compteur: compteurReducer,
      utilisateur: utilisateurReducer,
      booksBorrowed: bookBorrowReducer,
-     fetchingData: fetchingDataReducer
- })
+     fetchingData: fetchingDataReducer,
+     allBooks: booksReducer,
+     errors: errorsReducer,
+     /**
+      * comment et comment_compteur
+      * doivent être compris aussi étant donné qu'ils appartiennent
+      * à l'objet state initial
+      * Mais puisqu'on n'en a pas besoin, on crée de "faux" reducers
+      */
+     comment: (state,action) => null, 
+     comment_compteur: (state,action) => null
+})
