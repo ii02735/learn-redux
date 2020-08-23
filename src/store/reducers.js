@@ -25,10 +25,6 @@ export const compteurReducer = (state=initialState.compteur,action) => {
     {
         case CONSTANTS.SET_COMPTEUR:
             return action.payload; //La valeur de retour sera la valeur du nouvel état, le contenu du payload
-                                   /**
-                                    *  Ce qui est logique, car on stocke le résultat de compteurReducer dans 
-                                    *  la constante nextState (const nextState = compteurReducer(state,action)
-                                    **/ 
         default: //Si l'action n'est pas reconnue, on retourne la valeur initiale
             return state;
     }
