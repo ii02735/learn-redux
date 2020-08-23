@@ -29,3 +29,16 @@ export const compteurReducer = (state,action) => {
             return state;
     }
 }
+
+//Définition d'un reducer pour gérer l'utilisateur
+
+export const utilisateurReducer = (state,action) => {
+
+    switch(action.type)
+    {
+        case CONSTANTS.SET_USER:
+            return action.payload;
+        default:
+            return state;
+    }
+}
