@@ -6,6 +6,9 @@
  */
 
 import CONSTANTS from "../constants"
+//CombineReducers nous permet de combiner plusieurs reducers en un seul
+//Et c'est à partir de de ce moment-là que Redux entre en jeu
+import { combineReducers } from "redux";
 
 /**
  * Structure de reducer
@@ -72,3 +75,17 @@ export const fetchingDataReducer = (state=false,action) => {
             return state;
     }
 }
+
+//CombineReducer est une fonction qui intègre plusieurs reducers :
+/**
+ * const reducer = combineReduer({ compteurReducer, utilisateurReducer, bookBorrowReducer, fetchingDataReducer })
+ * Mais plutôt qu'exporter une variable, autant exporter le résultat de la fonction
+ */
+
+ //Si on inspecte que le fichier initialState, on s'aperçoit qu'on a repris la structure de ce dernier : chaque clé a son propre reducer
+ export default combineReducers({
+     compteurReducer,
+     utilisateurReducer,
+     bookBorrowReducer,
+     fetchingDataReducer
+ })
