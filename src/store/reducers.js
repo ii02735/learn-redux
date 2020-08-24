@@ -84,6 +84,8 @@ export const booksReducer = (state=null,action) => {
             //On prend l'id du book qu'on souhaite supprimer
             stateCpy.splice(stateCpy.find((book) => book.id === action.payload.id))
             return stateCpy;
+        case CONSTANTS.SET_BOOKS:
+            return action.payload    
         default:
             return state;
     }
