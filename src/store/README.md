@@ -5,7 +5,7 @@ C'est justement à partir du store qu'on va gérer et récupérer les états don
 
 **Le fonctionnement de REDUX est le suivant :**
 
-**action** --> **dispatch** --> **reducer***--> **store** --*contient*--> **état** --*transmet*--> **composant / vue**
+**action** --> **dispatch** --> **reducer**--> **store** --*contient*--> **état** --*transmet*--> **composant / vue**
 
 La création de **reducers** se comporte en la rédaction de ***fonctions JS pures** : ce sont ces dernières qui joueront avec le store et ses états.
 
