@@ -7,12 +7,22 @@
  import CONSTANTS from "./actions/constants"
  import mainReducer from "./store/reducers"
  import initialState from "./initialState.json"
-
+ 
  //Il est inutile de passer par le mainReducer manuellement pour gérer / muter notre état
  //C'est justement le STORE qui gère la mutation d'état 
 
  import { createStore, applyMiddleware } from "redux"
- import { borrowBookAction, loginUser } from "./actions/actionsCreators"
+ import { borrowBookAction, loginUser, fetchSuggestions } from "./actions/actionsCreators"
+ /**
+  * redux-thunk est un middleware de redux
+  * Cela nous permet de créer des actionsCreators évolués
+  * nommés "thunk" et on peut contrôler dans ces actionsCreators
+  * le dispatch des actions, à l'instar d'un middleware classique
+  * 
+  * Mais ce qui est intéressant ici, c'est que cette notion de contrôle
+  * n'est pas global comme un middleware classique, mais rattaché à des actions
+  */
+ import thunkMiddleware from "redux-thunk"
 
  /**
   *  Les middlewares
@@ -63,8 +73,8 @@
  //Il faut ATTACHER le middleware à notre store afin que ce dernier soit rajouté dans l'exécution des dispatch de ces derniers
 
 
-
-const store = applyMiddleware(loggerMiddleware)(createStore)(/** arguments de createStore */mainReducer,initialState)
+                              //Ajout du middleware de thunk-redux
+const store = applyMiddleware(thunkMiddleware,loggerMiddleware)(createStore)(/** arguments de createStore */mainReducer,initialState)
 
 store.dispatch({
    type: CONSTANTS.SET_COMPTEUR,
@@ -92,3 +102,7 @@ store.dispatch({
  store.dispatch(borrowBookAction(store.getState(),2));
 
  store.dispatch(loginUser({username: "M. Librarian", role: "Librarian"}))
+
+ //On utilise le thunk pour dispatch
+ //Dès qu'on essaye de dispatch un 
+ store.dispatch(fetchSuggestions())
