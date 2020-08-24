@@ -3,35 +3,7 @@
     "comment_compteur": "Le compteur est juste à titre d'exemple",
     "compteur": 1,
     "utilisateur": {},
-    "allBooks": [
-        {
-            "id": 1,
-            "auteur": "John Doe",
-            "sortie": "2020",
-            "titre": "La plume rouge",
-            "genre": "policier",
-            "description": "Les aventures d'un inspecteur de police ayant pour partenaire un écrivain mystérieux",
-            "exemplaires": 10
-        },
-        {
-            "id": 2,
-            "auteur": "Tim Sullivan",
-            "sortie": "2015",
-            "titre": "Les ruines d'un ancien monde",
-            "genre": "Fantastique",
-            "description": "Les chroniques d'un archéologue sur les mystérieuses ruines qu'il a découverte au fin fond de l'Écosse",
-            "exemplaires": 0
-        },
-        {
-            "id": 3,
-            "auteur": "Patrick McAllister",
-            "sortie": "2000",
-            "titre": "Le républicain vert",
-            "genre": "Drame historique",
-            "description": "Les récits d'un ancien soldat de l'Irish Republicain Army concernant la guerre entre les deux Irlandes",
-            "exemplaires": 5
-        }
-    ],
+    "allBooks": [],
     "booksBorrowed": [],
     "errors": [],
     "fetchingData": false
