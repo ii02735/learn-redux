@@ -64,6 +64,12 @@
    * injectent automatiquement la fonction dispatch pour pouvoir
    * l'utiliser à volonté, ainsi que la méthode getState pour pouvoir
    * consulter le state du store
+   * 
+   * Ainsi on distingue les thunks comme étant des actionsCreators
+   * asynchrones
+   * 
+   * N'oublions pas que les thunks retournent des FONCTIONS et non des
+   * OBJETS : donc de la logique peut continuellement être écrite
    */
  export const fetchSuggestions = () => (dispatch, getState) => {
      //Il est totalement possible d'utiliser dispatch pour justement envoyer des actions
