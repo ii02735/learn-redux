@@ -38,5 +38,50 @@
      payload: 2000
   })
 
+ /**
+  * Il est possible d'exécuter une callback à chaque fois après
+  * que le store / le state est modifié
+  * à l'aide de la fonction SUBSCRIBE
+  * 
+  * Ainsi on ajoute un écouteur à redux qui va gérer un événement
+  * 
+  * Attention, l'ordre est critique
+  * Il faut que cette fonction soit définie AVANT la modification du store
+  */
 
-  console.log("changed state", store.getState())
+  const listener = store.subscribe(() => console.log("Hey the store has been updated !", store.getState()))
+
+  store.dispatch({
+    type: CONSTANTS.BORROW_BOOK,
+    payload: store.getState().allBooks.filter((book) => book.titre === "Le républicain vert")[0]
+  });
+
+  store.dispatch({
+     type: CONSTANTS.ADD_BOOK,
+     payload: {
+        id: 6,
+        titre: "Redux et RxJS",
+        auteur: "Abramov",
+        sortie: "2018",
+        genre: "Développement web"
+     }
+  })
+
+  //Il est possible de UNSUBSCRIBE (désincrire) un événement on invoquant l'objet qui a stocké le résultat du subscribe
+  
+  listener();
+
+  //À ce stade là, le dispatch ci-dessous n'invoquera plus la callback du listener
+
+  store.dispatch({
+   type: CONSTANTS.ADD_BOOK,
+   payload: {
+      id: 6,
+      titre: "Redux et API Context",
+      auteur: "Abramov",
+      sortie: "2020",
+      genre: "Développement web"
+     }
+  })
+
+  console.log("New books : ", store.getState().allBooks)
