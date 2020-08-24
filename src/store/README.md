@@ -17,7 +17,7 @@ La création de **reducers** se comporte en la rédaction de ***fonctions JS pur
 
 - Contrôler / exécuter de la logique avant exécution du `dispatch` grâce aux ***middlewares***
   **Par conséquent, le fonctionnement de REDUX se modifie :**
-**action** --> **MIDDLEWARE** --> **dispatch** --> **reducer**--> **store** --*contient*--> **état** --*transmet*--> **composant / vue**
+**action** --> **MIDDLEWARE** --> **dispatch** --> **reducer**--> **store** --*contient*--> **état** --*transmet à*--> **composant / vue**
 
 - Exécuter de la logique avant transmission / envoi d'une action à un reducer particulier, à l'aide des ***actions creators***
   En effet, il n'est pas possible d'écrire directement dans la logique **DANS un REDUCER** : ce dernier est destiné seulement à muter des états du store.
@@ -26,4 +26,4 @@ La création de **reducers** se comporte en la rédaction de ***fonctions JS pur
   Il faut l'installer à partir comme ceci : `npm i redux-thunk`
   Elle permet de simplifier ce genre d'opérations, il n'est pas obligé de l'installer.
   
-  Pour plus d'informations, lire la réponse de Dan Abramov, co-auteur de Redux : (https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559)
+  Pour plus d'informations, lire la réponse de Dan Abramov, co-auteur de Redux : https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559
