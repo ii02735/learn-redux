@@ -16,16 +16,24 @@
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+    "html-loader": "^1.2.1",
+    "html-webpack-plugin": "^4.3.0",
     "json-loader": "^0.5.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "isomorphic-fetch": "^2.2.1",
     "json-server": "^0.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   }

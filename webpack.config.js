@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.js", //on donne à Webpack index.js en entrée
@@ -21,13 +22,21 @@ module.exports = {
                 options: { //ici contient les règles propres à babel (on reprend le contenu du .babelrc qui était utile pour babel-cli)
                     presets: ['@babel/preset-env']
                 }
-            }
+            },
             //Pas besoin d'utiliser json-loader : webpack >= 2.0.0 interprète déjà les fichiers JSON
             // {
             //     test: /\.json$/,
             //     exclude: /(node_modules)/,
             //     loader: 'json-loader' //json-loader permet de charger un fichier JSON du côté client
             // }
+            {   //Interprétation des fichiers JSX par babel à l'aide du preset de React
+                test: /\.(jsx|js)$/,
+                exclude: /(node_modules)/,
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-react']
+                }
+            }
         ]
     }
 }
