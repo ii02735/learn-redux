@@ -4,6 +4,7 @@
  * aboutira à un changement du store, à l'aide du dispatch
  */
  import CONSTANTS from "./constants";
+ import fetch from "isomorphic-fetch"; //polyfill de fetch pour les navigateurs qui ne sont pas compatibles
 
   
  /**
@@ -71,7 +72,7 @@
    * N'oublions pas que les thunks retournent des FONCTIONS et non des
    * OBJETS : donc de la logique peut continuellement être écrite
    */
- export const fetchSuggestions = () => (dispatch, getState) => {
+ export const exampleThunk = (dispatch, getState) => {
      //Il est totalement possible d'utiliser dispatch pour justement envoyer des actions
      //de manière classique
      console.group("fetchSuggestions")
@@ -92,5 +93,56 @@
          })
      },3000)
 
+ }
 
+ /**
+  * 
+  * @param {string} value Valeur recherchée pour récupérer des suggestions de livres
+  * 
+  * Étant donné que cette action est destinée à faire des requêtes d'API --> exécution
+  * asynchrone, fetchSuggestions est un thunk : d'où la raison de retourner une fonction
+  * avec un dispatch en paramètre
+  */
+ export const fetchSuggestions = (value) => (dispatch) => {
+    /**
+     * On souhaite faire une requête
+     * On informe ceci à notre store
+     */
+    dispatch({ type: CONSTANTS.FETCHING_DATA, payload: true })
+
+    /**
+     * Il faudra exécuter un autre dispatch lorsqu'on aura
+     * fini de récupérer les data, et cela de manière asynchrone
+     * 
+     * Le bloc suivant va montrer la simplicité d'écriture du thunk
+     */
+     
+     //fetch retourne une promesse, donc un résultat qui sera disponible de manière asynchrone
+     fetch(`http://localhost:4000/books?q=titre&v=${value}`)
+        .then(response => response.json()) //on parse la réponse en JSON
+        .then(BooksSuggestions => {
+            dispatch({
+                type: CONSTANTS.SET_BOOKS,
+                payload: BooksSuggestions
+            })//Attention ! Il ne faut pas oublier qu'on ne doit pas retourner d'action, mais juste l'exécuter, tel est le principe du thunk
+        }).catch((error) => {
+            dispatch({
+                type: CONSTANTS.ADD_ERROR,
+                payload: error.message
+            })
+
+            //Si une erreur s'est déclenchée : inutile d'aller plus loin, on annule le fetching afin que la vue soit prochainement informée
+
+            dispatch({
+                type: CONSTANTS.FETCHING_DATA,
+                payload: false
+            })
+        })
+        
+        //On peut faire un autre test, asynchrone, avec setTimeout
+        //Comme setTimeout sera plus lent que le fetch, il sera exécuté en dernier
+        setTimeout(() => dispatch({
+            type: CONSTANTS.SET_BOOKS,
+            payload: []
+        }),4000);
  }
