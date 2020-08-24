@@ -2,8 +2,14 @@ const express = require('express');
 const app = express();
 const port = 4000
 const data = require("../data/books.json")
+const cors = require("cors");
 
-app.get("/books",(req,res) => {
+const corsOptions = {
+    origin: "http://localhost:3030" //On autorise webpack / le Front à contacter l'API afin d'éviter des erreurs de CORS
+                                    //puisque les deux serveurs ne se trouvent pas sur le même port
+}
+
+app.get("/books",cors(corsOptions),(req,res) => {
     if(req.query.length == 0)
         res.json(data.books);
     else
