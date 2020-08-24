@@ -4,7 +4,7 @@
 
  //L'utilisation des constantes est importante afin de ne pas se tromper dans l'appel des différentes actions
 
- import CONSTANTS from "./constants"
+ import CONSTANTS from "./actions/constants"
  import mainReducer from "./store/reducers"
  import initialState from "./initialState.json"
 
@@ -12,6 +12,7 @@
  //C'est justement le STORE qui gère la mutation d'état 
 
  import { createStore, applyMiddleware } from "redux"
+ import { borrowBookAction, loginUser } from "./actions/actionsCreators"
 
  /**
   *  Les middlewares
@@ -85,3 +86,9 @@ store.dispatch({
        genre: "Développement web"
     }
  })
+
+ store.dispatch(borrowBookAction(store.getState(),28));
+
+ store.dispatch(borrowBookAction(store.getState(),2));
+
+ store.dispatch(loginUser({username: "M. Librarian", role: "Librarian"}))
