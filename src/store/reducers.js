@@ -1,11 +1,11 @@
 /**
  * Dans les reducers, on définit les fonctions pour les constantes qu'on a défini
  * Les constantes représentent les actions qu'on souhaite réaliser
- * 
+ *  
  * Mais les actions en elle-mêmes doivent être définies pour effectuer la mutation d'états
  */
 
-import CONSTANTS from "../constants"
+import CONSTANTS from "../actions/constants"
 //CombineReducers nous permet de combiner plusieurs reducers en un seul
 //Et c'est à partir de de ce moment-là que Redux entre en jeu
 import { combineReducers } from "redux";
@@ -137,3 +137,5 @@ export default combineReducers({
      comment: (state,action) => null, 
      comment_compteur: (state,action) => null
 })
+
+//Ainsi on va utiliser le store de Redux à l'aide du reducer global qu'on retourne ici
