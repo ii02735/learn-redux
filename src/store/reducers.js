@@ -64,10 +64,7 @@ export const bookBorrowReducer = (state=null,action) => {
 export const fetchingDataReducer = (state=null,action) => {
     switch (action.type) {
         case CONSTANTS.FETCHING_DATA:
-            return true;
-        
-        case CONSTANTS.FINISHED_FETCHING:
-            return false;    
+            return action.payload;
 
         default:
             return state;
